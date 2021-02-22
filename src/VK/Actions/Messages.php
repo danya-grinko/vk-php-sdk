@@ -1,6 +1,6 @@
 <?php
 namespace VK\Actions;
-
+ 
 use VK\Actions\Enums\MessagesFilter;
 use VK\Actions\Enums\MessagesMediaType;
 use VK\Actions\Enums\MessagesRev;
@@ -9,7 +9,6 @@ use VK\Exceptions\Api\VKApiLimitsException;
 use VK\Exceptions\Api\VKApiMessagesCantChangeInviteLinkException;
 use VK\Exceptions\Api\VKApiMessagesCantDeleteForAllException;
 use VK\Exceptions\Api\VKApiMessagesCantFwdException;
-use VK\Exceptions\Api\VKApiMessagesCantPinOneTimeStoryException;
 use VK\Exceptions\Api\VKApiMessagesCantSeeInviteLinkException;
 use VK\Exceptions\Api\VKApiMessagesChatBotFeatureException;
 use VK\Exceptions\Api\VKApiMessagesChatNotAdminException;
@@ -35,16 +34,16 @@ use VK\Exceptions\Api\VKApiPhotoChangedException;
 use VK\Exceptions\Api\VKApiUploadException;
 use VK\Exceptions\VKApiException;
 use VK\Exceptions\VKClientException;
-
+ 
 /**
  */
 class Messages {
-
+ 
 	/**
 	 * @var VKApiRequest
 	 */
 	private $request;
-
+ 
 	/**
 	 * Messages constructor.
 	 *
@@ -53,7 +52,7 @@ class Messages {
 	public function __construct(VKApiRequest $request) {
 		$this->request = $request;
 	}
-
+ 
 	/**
 	 * Adds a new user to a chat.
 	 *
@@ -72,7 +71,25 @@ class Messages {
 	public function addChatUser($access_token, array $params = []) {
 		return $this->request->post('messages.addChatUser', $access_token, $params);
 	}
-
+ 
+	/**
+	 *
+	 *  Send message event for bots.
+	 * 
+	 * @param $access_token
+	 * @param array $params
+	 * - @var string event_id: ID of the event
+	 * - @var integer user_id: ID of the user
+	 * - @var integer peer_id: ID of the chat
+	 * - @var string event_data: object for event
+	 * @throws VKApiException
+	 * @throws VKClientException
+	 * @return array|mixed|null
+	 */
+	public function sendMessageEventAnswer($access_token, array $params = []) {
+		return $this->request->post('messages.sendMessageEventAnswer', $access_token, $params);
+	}
+ 
 	/**
 	 * Allows sending messages from community to the current user.
 	 *
@@ -87,7 +104,7 @@ class Messages {
 	public function allowMessagesFromGroup($access_token, array $params = []) {
 		return $this->request->post('messages.allowMessagesFromGroup', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Creates a chat with several participants.
 	 *
@@ -103,7 +120,7 @@ class Messages {
 	public function createChat($access_token, array $params = []) {
 		return $this->request->post('messages.createChat', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Deletes one or more messages.
 	 *
@@ -121,7 +138,7 @@ class Messages {
 	public function delete($access_token, array $params = []) {
 		return $this->request->post('messages.delete', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Deletes a chat's cover picture.
 	 *
@@ -137,7 +154,7 @@ class Messages {
 	public function deleteChatPhoto($access_token, array $params = []) {
 		return $this->request->post('messages.deleteChatPhoto', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Deletes all private messages in a conversation.
 	 *
@@ -154,7 +171,7 @@ class Messages {
 	public function deleteConversation($access_token, array $params = []) {
 		return $this->request->post('messages.deleteConversation', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Denies sending message from community to the current user.
 	 *
@@ -168,7 +185,7 @@ class Messages {
 	public function denyMessagesFromGroup($access_token, array $params = []) {
 		return $this->request->post('messages.denyMessagesFromGroup', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Edits the message.
 	 *
@@ -199,7 +216,7 @@ class Messages {
 	public function edit($access_token, array $params = []) {
 		return $this->request->post('messages.edit', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Edits the title of a chat.
 	 *
@@ -215,7 +232,7 @@ class Messages {
 	public function editChat($access_token, array $params = []) {
 		return $this->request->post('messages.editChat', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns messages by their IDs within the conversation.
 	 *
@@ -233,7 +250,7 @@ class Messages {
 	public function getByConversationMessageId($access_token, array $params = []) {
 		return $this->request->post('messages.getByConversationMessageId', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns messages by their IDs.
 	 *
@@ -251,7 +268,7 @@ class Messages {
 	public function getById($access_token, array $params = []) {
 		return $this->request->post('messages.getById', $access_token, $params);
 	}
-
+ 
 	/**
 	 * @param string $access_token
 	 * @param array $params 
@@ -266,7 +283,7 @@ class Messages {
 	public function getChatPreview($access_token, array $params = []) {
 		return $this->request->post('messages.getChatPreview', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns a list of IDs of users participating in a chat.
 	 *
@@ -283,7 +300,7 @@ class Messages {
 	public function getConversationMembers($access_token, array $params = []) {
 		return $this->request->post('messages.getConversationMembers', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns a list of the current user's conversations.
 	 *
@@ -305,7 +322,7 @@ class Messages {
 	public function getConversations($access_token, array $params = []) {
 		return $this->request->post('messages.getConversations', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns conversations by their IDs
 	 *
@@ -325,7 +342,7 @@ class Messages {
 	public function getConversationsById($access_token, array $params = []) {
 		return $this->request->post('messages.getConversationsById', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns message history for the specified user or group chat.
 	 *
@@ -348,7 +365,7 @@ class Messages {
 	public function getHistory($access_token, array $params = []) {
 		return $this->request->post('messages.getHistory', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns media files from the dialog or group chat.
 	 *
@@ -370,7 +387,7 @@ class Messages {
 	public function getHistoryAttachments($access_token, array $params = []) {
 		return $this->request->post('messages.getHistoryAttachments', $access_token, $params);
 	}
-
+ 
 	/**
 	 * @param string $access_token
 	 * @param array $params 
@@ -386,7 +403,7 @@ class Messages {
 	public function getInviteLink($access_token, array $params = []) {
 		return $this->request->post('messages.getInviteLink', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns a user's current status and date of last activity.
 	 *
@@ -400,7 +417,7 @@ class Messages {
 	public function getLastActivity($access_token, array $params = []) {
 		return $this->request->post('messages.getLastActivity', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns updates in user's private messages.
 	 *
@@ -427,7 +444,7 @@ class Messages {
 	public function getLongPollHistory($access_token, array $params = []) {
 		return $this->request->post('messages.getLongPollHistory', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns data required for connection to a Long Poll server.
 	 *
@@ -443,7 +460,7 @@ class Messages {
 	public function getLongPollServer($access_token, array $params = []) {
 		return $this->request->post('messages.getLongPollServer', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns information whether sending messages from the community to current user is allowed.
 	 *
@@ -458,7 +475,7 @@ class Messages {
 	public function isMessagesFromGroupAllowed($access_token, array $params = []) {
 		return $this->request->post('messages.isMessagesFromGroupAllowed', $access_token, $params);
 	}
-
+ 
 	/**
 	 * @param string $access_token
 	 * @param array $params 
@@ -472,7 +489,7 @@ class Messages {
 	public function joinChatByInviteLink($access_token, array $params = []) {
 		return $this->request->post('messages.joinChatByInviteLink', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Marks and unmarks conversations as unanswered.
 	 *
@@ -488,7 +505,7 @@ class Messages {
 	public function markAsAnsweredConversation($access_token, array $params = []) {
 		return $this->request->post('messages.markAsAnsweredConversation', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Marks and unmarks messages as important (starred).
 	 *
@@ -503,7 +520,7 @@ class Messages {
 	public function markAsImportant($access_token, array $params = []) {
 		return $this->request->post('messages.markAsImportant', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Marks and unmarks conversations as important.
 	 *
@@ -519,7 +536,7 @@ class Messages {
 	public function markAsImportantConversation($access_token, array $params = []) {
 		return $this->request->post('messages.markAsImportantConversation', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Marks messages as read.
 	 *
@@ -536,7 +553,7 @@ class Messages {
 	public function markAsRead($access_token, array $params = []) {
 		return $this->request->post('messages.markAsRead', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Pin a message.
 	 *
@@ -547,13 +564,12 @@ class Messages {
 	 * @throws VKClientException
 	 * @throws VKApiException
 	 * @throws VKApiMessagesChatNotAdminException You are not admin of this chat
-	 * @throws VKApiMessagesCantPinOneTimeStoryException Cannot pin one-time story
 	 * @return mixed
 	 */
 	public function pin($access_token, array $params = []) {
 		return $this->request->post('messages.pin', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Allows the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.
 	 *
@@ -572,7 +588,7 @@ class Messages {
 	public function removeChatUser($access_token, array $params = []) {
 		return $this->request->post('messages.removeChatUser', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Restores a deleted message.
 	 *
@@ -587,7 +603,7 @@ class Messages {
 	public function restore($access_token, array $params = []) {
 		return $this->request->post('messages.restore', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns a list of the current user's private messages that match search criteria.
 	 *
@@ -609,7 +625,7 @@ class Messages {
 	public function search($access_token, array $params = []) {
 		return $this->request->post('messages.search', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Returns a list of the current user's conversations that match search criteria.
 	 *
@@ -627,7 +643,7 @@ class Messages {
 	public function searchConversations($access_token, array $params = []) {
 		return $this->request->post('messages.searchConversations', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Sends a message.
 	 *
@@ -670,7 +686,7 @@ class Messages {
 	public function send($access_token, array $params = []) {
 		return $this->request->post('messages.send', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Changes the status of a user as typing in a conversation.
 	 *
@@ -690,7 +706,7 @@ class Messages {
 	public function setActivity($access_token, array $params = []) {
 		return $this->request->post('messages.setActivity', $access_token, $params);
 	}
-
+ 
 	/**
 	 * Sets a previously-uploaded picture as the cover picture of a chat.
 	 *
@@ -707,7 +723,7 @@ class Messages {
 	public function setChatPhoto($access_token, array $params = []) {
 		return $this->request->post('messages.setChatPhoto', $access_token, $params);
 	}
-
+ 
 	/**
 	 * @param string $access_token
 	 * @param array $params 
