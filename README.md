@@ -2,9 +2,9 @@
 
 PHP library for VK API interaction, includes OAuth 2.0 authorization and API methods. Full VK API features documentation can be found [here](http://vk.com/dev).
 
-This library has been created using the VK API JSON Schema. It can be found [here](https://github.com/VKCOM/vk-api-schema). It uses VK API [version](https://vk.com/dev/versions) 5.101
+This library has been created using the VK API JSON Schema. It can be found [here](https://github.com/VKCOM/vk-api-schema). It uses VK API [version](https://vk.com/dev/versions) 5.130
 
-[![Packagist](https://img.shields.io/packagist/v/vkcom/vk-php-sdk.svg)](https://packagist.org/packages/vkcom/vk-php-sdk)
+[![Packagist](https://img.shields.io/packagist/v/vkcom/vk-php-sdk.svg)](https://packagist.org/packages/danya-grinko/vk-php-sdk)
 
 ## 1. Prerequisites
 
@@ -15,7 +15,7 @@ This library has been created using the VK API JSON Schema. It can be found [her
 The VK PHP SDK can be installed using Composer by running the following command:
 
 ```sh
-composer require vkcom/vk-php-sdk
+composer require danya-grinko/vk-php-sdk
 ```
 
 ## 3. Initialization
@@ -29,11 +29,11 @@ $vk = new VK\Client\VKApiClient();
 Also you can initialize `VKApiClient` with different API version and different language like this:
 
 ```php
-$vk = new VKApiClient('5.101');
+$vk = new VKApiClient('5.130');
 ```
 
 ```php
-$vk = new VKApiClient('5.101', VK\Client\Enums\VKLanguage::ENGLISH);
+$vk = new VKApiClient('5.130', VK\Client\Enums\VKLanguage::ENGLISH);
 ```
 
 ## 4. Authorization
