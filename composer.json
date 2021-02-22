@@ -3,7 +3,7 @@
     "description": "VK PHP SDK",
     "keywords": ["vk", "sdk"],
     "type": "library",
-    "homepage": "https://github.com/VKCOM/vk-php-sdk",
+    "homepage": "https://github.com/danya-grinko/vk-php-sdk",
     "license": "MIT",
     "require": {
         "php": ">=7.1"
